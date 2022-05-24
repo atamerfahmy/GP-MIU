@@ -3,8 +3,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import GetDoctor from '../Admin/GetDoctors';
 import Header from '../header';
+import PatientAppointments from './patientAppointments';
 import Profile from './Profile';
 import SecNavBar from './secNavBar';
+import BookAppointment from './bookAppointment';
+
 function PatientHomePage() {
   const { pagename } = useParams();
   console.log(pagename);
@@ -14,6 +17,10 @@ function PatientHomePage() {
         return <GetDoctor />;
       case 'profile':
         return <Profile />;
+      case 'patientAppointments':
+        return <PatientAppointments />;
+      case 'bookAppointment':
+        return <BookAppointment />;
       default:
         return <h1>Page Not Found</h1>;
     }

@@ -5,6 +5,7 @@ import AddDepartmentForm from '../Department/addDepartment';
 import GetDepartment from '../Department/getDepartment';
 import FeedBack from '../Feedback';
 import Header from '../header';
+import AddPatientForm from '../Patient/addPatient';
 import Patients from '../Patient/Patients';
 import AddDoctorForm from './AddDoctor';
 import GetDoctor from './GetDoctors';
@@ -25,6 +26,8 @@ function AdminHomePage() {
         return <FeedBack />;
       case 'patients':
         return <Patients />;
+      case 'add_patient':
+        return <AddPatientForm />;
       case 'addDoctor':
         return <AddDoctorForm />;
       case 'getDoctors':

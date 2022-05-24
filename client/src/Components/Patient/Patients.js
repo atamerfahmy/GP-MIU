@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Button,
   Col,
@@ -16,6 +16,9 @@ function Patients() {
   const [patients, setPatients] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+
+  console.log(location)
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -37,8 +40,13 @@ function Patients() {
     <div>
       <Nav tabs>
         <NavItem>
-          <NavLink active>
-            <Link to="/adminLogin/patientList">Patient List</Link>
+          <NavLink active={location?.pathname === "/admin/patients"}>
+            <Link to="/admin/patients">Patient List</Link>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink active={location?.pathname === "/admin/add_patient"}>
+            <Link to="/admin/add_patient">Add Patient</Link>
           </NavLink>
         </NavItem>
       </Nav>

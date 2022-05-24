@@ -41,22 +41,22 @@ function GetDoctor() {
         <Nav tabs>
           <NavItem>
             <NavLink active>
-              <Link to="/patientLogin">Doctor List</Link>
+              <Link to="/patient/doctors">Doctor List</Link>
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink>
-              <Link to="/patientLogin/bookAppointment">Book Appointment</Link>
+              <Link to="/patient/bookAppointment">Book Appointment</Link>
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink>
-              <Link to="/patientLogin/getPatientProfile">Edit Profile</Link>
+              <Link to="/patient/profile">Edit Profile</Link>
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink>
-              <Link to="/patientLogin/patientAppointments">
+              <Link to="/patient/patientAppointments">
                 View Appointments
               </Link>
             </NavLink>

@@ -12,6 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
+
+
 app.use('/api/v1', require('./routes/User'));
 app.use('/api/v1/patients', authMiddleware, require('./routes/Patient'));
 app.use('/api/v1/departments', authMiddleware, require('./routes/Department'));
@@ -21,6 +23,8 @@ app.use('/api/v1/feedback', authMiddleware, require('./routes/Feedback'));
 app.use('/api/v1/departments', authMiddleware, require('./routes/Department'));
 app.use(notFound);
 app.use(errorHandlerMiddleware);
+
+
 const startServer = () => {
   try {
     connectDB(process.env.MONGO_URI);

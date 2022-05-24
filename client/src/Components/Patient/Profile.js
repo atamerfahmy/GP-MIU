@@ -19,13 +19,17 @@ function Profile() {
   const [patientDetails, setPatientDetails] = useState({});
   const { _id } = jwt(localStorage.getItem('token'));
   useEffect(() => {
-    const res = axiosInstance.get(`/patients/${_id}`);
-    if (res.status === 200) {
-      setPatientDetails(res.data.patient);
-    }
-  }, [_id]);
+    axiosInstance.get(`/patients/${_id}`).then((res) => {
+      console.log(res)
+
+      if (res.status === 200) {
+        setPatientDetails(res.data.patient);
+      }
+    })
+    
+  }, []);
   const handleSubmit = async () => {
-    const res = await axiosInstance.post(`/patients/${_id}`, {
+    const res = await axiosInstance.patch(`/patients/${_id}`, {
       ...patientDetails,
     });
   };
@@ -35,22 +39,22 @@ function Profile() {
       <Nav tabs>
         <NavItem>
           <NavLink>
-            <Link to="/patientLogin">Doctor List</Link>
+            <Link to="/patient/doctors">Doctor List</Link>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink>
-            <Link to="/patientLogin/bookAppointment">Book Appointment</Link>
+            <Link to="/patient/bookAppointment">Book Appointment</Link>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink active>
-            <Link to="/patientLogin/getPatientProfile">Edit Profile</Link>
+            <Link to="/patient/profile">Edit Profile</Link>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink>
-            <Link to="/patientLogin/patientAppointments">
+            <Link to="/patient/patientAppointments">
               View Appointments
             </Link>
           </NavLink>
@@ -67,7 +71,7 @@ function Profile() {
                 </Col>
                 <Col sm="10">
                   <Input
-                    value={this.state.Name}
+                    value={patientDetails.name}
                     onChange={(e) =>
                       setPatientDetails({
                         ...patientDetails,
@@ -85,7 +89,7 @@ function Profile() {
                 </Col>
                 <Col sm="10">
                   <Input
-                    value={this.state.Email}
+                    value={patientDetails.email}
                     onChange={(e) =>
                       setPatientDetails({
                         ...patientDetails,
@@ -103,7 +107,7 @@ function Profile() {
                 </Col>
                 <Col sm="10">
                   <Input
-                    value={this.state.Phone}
+                    value={patientDetails.phone}
                     onChange={(e) =>
                       setPatientDetails({
                         ...patientDetails,
@@ -121,7 +125,7 @@ function Profile() {
                 </Col>
                 <Col sm="10">
                   <Input
-                    value={this.state.Address}
+                    value={patientDetails.address}
                     onChange={(e) =>
                       setPatientDetails({
                         ...patientDetails,

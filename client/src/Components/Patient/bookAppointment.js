@@ -53,26 +53,26 @@ class BookAppointment extends React.Component {
 				<Nav tabs>
 					<NavItem>
 						<NavLink>
-							<Link to="/patientLogin">Doctor List</Link>
+							<Link to="/patient/doctors">Doctor List</Link>
 						</NavLink>
 					</NavItem>
 					<NavItem>
 						<NavLink active>
-							<Link to="/patientLogin/bookAppointment">
+							<Link to="/patient/bookAppointment">
 								Book Appointment
 							</Link>
 						</NavLink>
 					</NavItem>
 					<NavItem>
 						<NavLink>
-							<Link to="/patientLogin/getPatientProfile">
+							<Link to="/patient/profile">
 								Edit Profile
 							</Link>
 						</NavLink>
 					</NavItem>
 					<NavItem>
 						<NavLink>
-							<Link to="/patientLogin/patientAppointments">
+							<Link to="/patient/patientAppointments">
 								View Appointments
 							</Link>
 						</NavLink>

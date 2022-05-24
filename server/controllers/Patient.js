@@ -2,7 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const Patient = require('../models/Patient');
 const getPatientDetails = async (req, res) => {
   const { id } = req.params;
-  const patient = await Patient.find({ _id: id }).select('-password');
+  const patient = await Patient.findById(id).select('-password');
 
   res.status(StatusCodes.OK).json({ patient });
 };
@@ -26,9 +26,15 @@ const deletePatient = async (req, res) => {
   }
 };
 
+const createPatient = async (req, res) => {
+  const patient = await Patient.create(req.body);
+  res.status(200).json({ patient });
+};
+
 module.exports = {
   getPatientDetails,
   getAllPatientDetails,
   updatePatient,
   deletePatient,
+  createPatient
 };

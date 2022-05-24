@@ -7,9 +7,13 @@ const {
   getAllPatientDetails,
   updatePatient,
   deletePatient,
+  createPatient
 } = require('../controllers/Patient');
-router.use('/', adminMiddleware, getAllPatientDetails);
+
+router.post('/', createPatient);
 router.get('/:id', getPatientDetails);
 router.patch('/:id', updatePatient);
 router.delete('/:id', adminMiddleware, deletePatient);
+router.use('/', adminMiddleware, getAllPatientDetails);
+
 module.exports = router;
