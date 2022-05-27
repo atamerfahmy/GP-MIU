@@ -20,7 +20,7 @@ function Footer() {
 									style={{ color: "white" }}
 								>
 									<FontAwesomeIcon icon={faEnvelope} />{" "}
-									contact@global.com
+									omar@gomla.com
 								</a>
 							</li>
 						</ul>
@@ -28,9 +28,9 @@ function Footer() {
 
 					<Col sm="12" md="4">
 						<h2>Address</h2>
-						<p>H.NO 123/456</p>
-						<p>Heaven street</p>
-						<p>London</p>
+						<p>Misr International University</p>
+						<p>Ismailia street</p>
+						<p>Cairo</p>
 					</Col>
 					<Col sm="12" md="4">
 						<SocialIcon
@@ -57,7 +57,7 @@ function Footer() {
 				</Row>
 				<Row>
 					<Col sm="12">
-						<p>©Copyright 2021 Global Hospitals</p>
+						<p>©Copyright 2022 Gomla Hospitals</p>
 					</Col>
 				</Row>
 			</Container>

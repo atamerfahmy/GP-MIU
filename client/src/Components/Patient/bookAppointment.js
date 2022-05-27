@@ -15,6 +15,9 @@ import {
 	InputGroupButtonDropdown,
 } from "reactstrap";
 import Cookies from "js-cookie";
+import axiosInstance from '../../utils/axiosInstance';
+
+
 class BookAppointment extends React.Component {
 	constructor(props) {
 		super(props);
@@ -23,7 +26,7 @@ class BookAppointment extends React.Component {
 			Email: "",
 			Contact: "",
 			Age: "",
-			Day: "",
+			Date: "",
 			Speciality: "",
 			Description: "",
 			Id: "",
@@ -32,21 +35,42 @@ class BookAppointment extends React.Component {
 	}
 	handleSubmit(e) {
 		console.log(this.state);
-		const headers = {
-			authorization: Cookies.get("token"),
-		};
-		axios
-			.post("http://localhost:12347/bookAppointment", this.state, {
-				headers: headers,
-			})
-			.then((res) => {
-				console.log(res);
-				alert(res.data);
-			});
+
+		let { Contact, Date, Description, Speciality, Id } = this.state;
+
+		if(!Contact || !Date || !Description || !Speciality || !Id){
+			return alert("Please fill in all the required fields");
+		}
+
+		axiosInstance.post(`/patients/bookAppointment`, {
+			doctorId: this.state.Id,
+			date: this.state.Date,
+			description: this.state.Description,
+			speciality: this.state.Speciality,
+			contact: this.state.Contact
+		}).then((res) => {
+			console.log(res)
+
+			if (res.status === 200) {
+				alert("Appointments is booked successfully.");
+				this.setState({
+					Name: "",
+					Email: "",
+					Contact: "",
+					Age: "",
+					Date: "",
+					Speciality: "",
+					Description: "",
+					Id: "",
+				})
+			}else{
+				alert("Something went wrong!")
+			}
+		})
 	}
-	componentDidMount() {
-		this.inputRef.current.focus();
-	}
+	// componentDidMount() {
+	// 	this.inputRef.current.focus();
+	// }
 	render() {
 		return (
 			<div>
@@ -82,7 +106,7 @@ class BookAppointment extends React.Component {
 					<Col md="3"></Col>
 					<Col md="6">
 						<Form className="mt-3">
-							<FormGroup>
+							{/* <FormGroup>
 								<Label>Name *</Label>
 								<Input
 									innerRef={this.inputRef}
@@ -94,8 +118,8 @@ class BookAppointment extends React.Component {
 										this.setState({ Name: e.target.value });
 									}}
 								/>
-							</FormGroup>
-							<FormGroup>
+							</FormGroup> */}
+							{/* <FormGroup>
 								<Label>Email</Label>
 								<Input
 									type="email"
@@ -108,7 +132,7 @@ class BookAppointment extends React.Component {
 										});
 									}}
 								/>
-							</FormGroup>
+							</FormGroup> */}
 							<FormGroup>
 								<Label>Contact</Label>
 								<Input
@@ -123,7 +147,7 @@ class BookAppointment extends React.Component {
 									}}
 								/>
 							</FormGroup>
-							<FormGroup>
+							{/* <FormGroup>
 								<Label>Age *</Label>
 								<Input
 									type="number"
@@ -131,13 +155,14 @@ class BookAppointment extends React.Component {
 										this.setState({ Age: e.target.value });
 									}}
 								/>
-							</FormGroup>
+							</FormGroup> */}
 							<FormGroup>
-								<Label>Day</Label>
+								<Label>Date</Label>
 								<Input
 									type="date"
 									onChange={(e) => {
-										this.setState({ Day: e.target.value });
+										console.log(e.target.value)
+										this.setState({ Date: e.target.value });
 									}}
 								/>
 							</FormGroup>
@@ -166,7 +191,7 @@ class BookAppointment extends React.Component {
 							<FormGroup>
 								<Label>Doctor Id *</Label>
 								<Input
-									type="number"
+									type="text"
 									onChange={(e) => {
 										this.setState({ Id: e.target.value });
 									}}

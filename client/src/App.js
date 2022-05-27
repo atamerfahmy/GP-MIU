@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import './App.css';
 import AdminHomePage from './Components/Admin/AdminHomePage';
 import Appointments from './Components/Doctor/Appointments';
@@ -9,6 +9,7 @@ import Home from './Components/Home';
 import LogIn from './Components/Login';
 import PatientHomePage from './Components/Patient';
 import store from './utils/Redux/store';
+
 function App() {
   return (
     <ErrorBoundary>
@@ -23,7 +24,7 @@ function App() {
           <Route path="/admin/:pagename">
             <AdminHomePage />
           </Route>
-          <Route path="/doctor/appoinments">
+          <Route path="/doctor/appointments">
             <Appointments />
           </Route>
           <Route path="/patient/:pagename">

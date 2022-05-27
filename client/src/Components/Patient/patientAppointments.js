@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Nav, NavItem, NavLink, Table } from "reactstrap";
 import Cookies from "js-cookie";
+import axiosInstance from '../../utils/axiosInstance';
+
+
 class PatientAppointments extends Component {
 	constructor(props) {
 		super(props);
@@ -11,22 +14,15 @@ class PatientAppointments extends Component {
 		};
 	}
 	async componentDidMount() {
-		const headers = {
-			authorization: Cookies.get("token"),
-		};
-		await axios
-			.post(
-				"http://localhost:12347/patientAppointment",
-				{
-					Email: Cookies.get("patientEmail"),
-				},
-				{ headers: headers }
-			)
-			.then((res) => {
-				console.log(res);
-				this.setState({ appointments: res.data });
-			});
-		console.log(this.state);
+		axiosInstance.get(`/patients/getAppointments`).then((res) => {
+			console.log(res)
+
+			if (res.status === 200) {
+				this.setState({
+					appointments: res.data.appointments
+				});
+			}
+		})
 	}
 	render() {
 		return (
@@ -61,19 +57,21 @@ class PatientAppointments extends Component {
 				</Nav>
 				<Table>
 					<thead>
-						<th>Application Id</th>
+						<th>Appointment Id</th>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Prescription</th>
+						<th>Description</th>
+						<th>Date</th>
 					</thead>
 					<tbody>
 						{this.state.appointments.map((appointment) => {
 							return (
 								<tr>
-									<td>{appointment.Apid}</td>
-									<td>{appointment.Name}</td>
-									<td>{appointment.Email}</td>
-									<td>{appointment.Prescription}</td>
+									<td>{appointment._id}</td>
+									<td>{appointment.doctorName}</td>
+									<td>{appointment.doctorEmail}</td>
+									<td>{appointment.description}</td>
+									<td>{(new Date(appointment.date)).toDateString()}</td>
 								</tr>
 							);
 						})}

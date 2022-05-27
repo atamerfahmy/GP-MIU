@@ -5,15 +5,15 @@ function NavBar() {
   return (
     <Nav tabs>
       <NavItem>
-        <NavLink active>
-          <Link to="/doctor/appointments">View Appointments</Link>
+        <NavLink active to="/doctor/appointments">
+          <Link>View Appointments</Link>
         </NavLink>
       </NavItem>
-      <NavItem>
+      {/* <NavItem>
         <NavLink>
           <Link to="/doctorLogin/editDocProfile">Edit Profile</Link>
         </NavLink>
-      </NavItem>
+      </NavItem> */}
     </Nav>
   );
 }

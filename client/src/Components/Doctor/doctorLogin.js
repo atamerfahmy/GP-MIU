@@ -52,7 +52,7 @@ class DoctorLogin extends React.Component {
 					<SecNavBar
 						data="doctorData"
 						name="docName"
-						link="/doctorLogin"
+						link="/"
 					/>
 					<Header msg={Cookies.get("docName")} />
 					<DoctorRoutes />

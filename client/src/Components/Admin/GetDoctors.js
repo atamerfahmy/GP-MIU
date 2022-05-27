@@ -117,7 +117,7 @@ function GetDoctor() {
                   .map((doctor, index) => {
                     return (
                       <tr>
-                        <th scope="row">{doctor.doctor_id}</th>
+                        <th>{doctor._id}</th>
                         <td>{doctor.name}</td>
                         <td>{doctor.department}</td>
                         {role !== 'admin' ? null : (

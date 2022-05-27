@@ -8,12 +8,15 @@ const {
   deleteDoctor,
   getDoctor,
   editDoctor,
+  getDocAppointments
 } = require('../controllers/Doctor');
 const {
   getAppointments,
   postAppointment,
   updateAppointment,
 } = require('../controllers/Appointment');
+
+router.get('/getDocAppointments', adminDocMiddleware, getDocAppointments);
 router.get('/', getDoctors);
 router.post('/', adminMiddleware, postDoctors);
 router.get('/:id', adminDocMiddleware, getDoctor);

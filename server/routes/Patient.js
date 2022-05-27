@@ -7,9 +7,13 @@ const {
   getAllPatientDetails,
   updatePatient,
   deletePatient,
-  createPatient
+  createPatient,
+  bookAppointment,
+  getAppointments
 } = require('../controllers/Patient');
 
+router.post('/bookAppointment', bookAppointment)
+router.get('/getAppointments', getAppointments)
 router.post('/', createPatient);
 router.get('/:id', getPatientDetails);
 router.patch('/:id', updatePatient);

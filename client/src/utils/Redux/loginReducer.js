@@ -21,7 +21,12 @@ const loginReducer = (state = initialState, action) => {
       localStorage.removeItem('token');
       localStorage.removeItem('name');
       localStorage.removeItem('role');
-      return {};
+      return {
+        ...state,
+        isLogedIn: false,
+        name: '',
+        role: '',
+      };
     default:
       return state;
   }

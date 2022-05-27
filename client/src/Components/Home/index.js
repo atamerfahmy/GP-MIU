@@ -12,12 +12,13 @@ function Home() {
         <HomeItem
           style={{
             paddingTop: '10px',
+            paddingLeft: '10px',
             flex: '1',
             position: 'absolute',
             color: 'white',
           }}
         >
-          Global Hospitals
+          Gomla Hospitals
         </HomeItem>
         <HomeItem
           style={{
@@ -26,7 +27,7 @@ function Home() {
             textAlign: 'right',
           }}
         >
-          <Link style={{ color: 'white' }} to="/signUp">
+          <Link style={{ color: 'white', marginRight: '10px' }} to="/signUp">
             New User? Sign Up!!
           </Link>
         </HomeItem>

@@ -2,6 +2,8 @@ import jwt from 'jwt-decode';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Input, Row, Table } from 'reactstrap';
 import axiosInstance from '../../utils/axiosInstance';
+import Header from '../header';
+import SecNavBar from '../Patient/secNavBar';
 import NavBar from './NavBar';
 function Appointments() {
   const [appointments, setAppointments] = useState([]);
@@ -9,9 +11,8 @@ function Appointments() {
   const [isOpen, setOpen] = useState(false);
   const [prescription, setPrescription] = useState('');
   useEffect(() => {
-    const { _id } = jwt(localStorage.getItem('token'));
     const getData = async () => {
-      const res = await axiosInstance.get(`/doctors/${_id}/appointments`);
+      const res = await axiosInstance.get(`/doctors/getDocAppointments`);
       if (res.status === 200) {
         setAppointments(res.data.appointments);
       }
@@ -29,16 +30,18 @@ function Appointments() {
 
   return (
     <div>
-      <NavBar />
+      <SecNavBar link="/doctor/appointments" />
+      {/* <Header msg={Cookies.get('patientName')} /> */}
+      {/* <NavBar /> */}
       <Row>
         <Col className="mt-3" sm="3"></Col>
         <Col className="mt-3">
-          <Input
+          {/* <Input
             style={{ width: '50%' }}
             placeholder="Search..."
             type="text"
             onChange={(e) => setSearch(e.target.value)}
-          />
+          /> */}
           <Table
             striped
             style={{
@@ -52,6 +55,7 @@ function Appointments() {
               <th>Description</th>
               <th>Date</th>
               <th>Phone Number</th>
+              <th>Speciality</th>
             </thead>
             {typeof appointments != undefined
               ? appointments
@@ -59,7 +63,7 @@ function Appointments() {
                     if (search === '') {
                       return appointment;
                     } else if (
-                      appointment.patient_name
+                      appointment.patientName
                         .toLowerCase()
                         .includes(search.toLowerCase())
                     ) {
@@ -69,11 +73,12 @@ function Appointments() {
                   .map((appointment) => {
                     return (
                       <tr>
-                        <td>{appointment.name}</td>
+                        <td>{appointment.patientName}</td>
                         <td>{appointment.description}</td>
-                        <td>{appointment.date}</td>
-                        <td>{appointment.phone}</td>
-                        {isOpen ? (
+                        <td>{(new Date(appointment.date)).toDateString()}</td>
+                        <td>{appointment.contact || "N/A"}</td>
+                        <td>{appointment.speciality || "N/A"}</td>
+                        {/* {isOpen ? (
                           <td></td>
                         ) : (
                           <td>
@@ -86,8 +91,8 @@ function Appointments() {
                               Prescribe
                             </Button>
                           </td>
-                        )}
-                        {this.state.isOpen ? (
+                        )} */}
+                        {/* {isOpen ? (
                           <td
                             style={{
                               columnWidth: '200px',
@@ -109,7 +114,7 @@ function Appointments() {
                           </td>
                         ) : (
                           <td></td>
-                        )}
+                        )} */}
                       </tr>
                     );
                   })

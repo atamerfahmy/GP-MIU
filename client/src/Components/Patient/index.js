@@ -27,7 +27,7 @@ function PatientHomePage() {
   };
   return (
     <div>
-      <SecNavBar data="patientData" name="patientName" link="/patientLogin" />
+      <SecNavBar data="patientData" name="patientName" link="/" />
       <Header msg={Cookies.get('patientName')} />
       {getPage()}
     </div>
