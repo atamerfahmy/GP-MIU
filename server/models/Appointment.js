@@ -20,7 +20,10 @@ const appointmentSchema = new mongoose.Schema({
   },
   contact: {
     type: String
-  }
+  },
+  photoURL: {
+    type: String
+  },
 });
 
 module.exports = mongoose.model('appointment', appointmentSchema);

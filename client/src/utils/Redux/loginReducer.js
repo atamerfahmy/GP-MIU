@@ -1,16 +1,16 @@
 const initialState = {
   isLogedIn: false,
-  name: localStorage.getItem('name') || '',
-  role: localStorage.getItem('role') || '',
+  name: localStorage.getItem('MIU_HMS_name') || '',
+  role: localStorage.getItem('MIU_HMS_role') || '',
 };
 
 const loginReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case 'LOG_IN':
-      localStorage.setItem('token', payload.token);
-      localStorage.setItem('name', payload.name);
-      localStorage.setItem('role', payload.role);
+      localStorage.setItem('MIU_HMS_token', payload.token);
+      localStorage.setItem('MIU_HMS_name', payload.name);
+      localStorage.setItem('MIU_HMS_role', payload.role);
       return {
         ...state,
         isLogedIn: true,
@@ -18,9 +18,9 @@ const loginReducer = (state = initialState, action) => {
         role: payload.role,
       };
     case 'LOG_OUT':
-      localStorage.removeItem('token');
-      localStorage.removeItem('name');
-      localStorage.removeItem('role');
+      localStorage.removeItem('MIU_HMS_token');
+      localStorage.removeItem('MIU_HMS_name');
+      localStorage.removeItem('MIU_HMS_role');
       return {
         ...state,
         isLogedIn: false,

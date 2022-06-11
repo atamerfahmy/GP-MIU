@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Nav, NavItem, NavLink, Table } from "reactstrap";
+import { Button, Nav, NavItem, NavLink, Table } from "reactstrap";
 import Cookies from "js-cookie";
 import axiosInstance from '../../utils/axiosInstance';
 
@@ -62,6 +62,7 @@ class PatientAppointments extends Component {
 						<th>Email</th>
 						<th>Description</th>
 						<th>Date</th>
+						<th>Attachements</th>
 					</thead>
 					<tbody>
 						{this.state.appointments.map((appointment) => {
@@ -72,6 +73,9 @@ class PatientAppointments extends Component {
 									<td>{appointment.doctorEmail}</td>
 									<td>{appointment.description}</td>
 									<td>{(new Date(appointment.date)).toDateString()}</td>
+									<td>
+										<Button onClick={() => window.open(appointment.photoURL)} disabled={!(appointment.photoURL)} color="primary">Show Attachement</Button>
+									</td>
 								</tr>
 							);
 						})}

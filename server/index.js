@@ -27,7 +27,9 @@ app.use(errorHandlerMiddleware);
 
 const startServer = () => {
   try {
-    connectDB(process.env.MONGO_URI);
+    connectDB(process.env.MONGO_URI).then(() => {
+      console.log("Connected to mongoDB.")
+    });
     app.listen(PORT, () => {
       console.log(`Server running on ${PORT}`);
     });

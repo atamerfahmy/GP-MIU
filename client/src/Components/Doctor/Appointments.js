@@ -5,14 +5,18 @@ import axiosInstance from '../../utils/axiosInstance';
 import Header from '../header';
 import SecNavBar from '../Patient/secNavBar';
 import NavBar from './NavBar';
+
 function Appointments() {
   const [appointments, setAppointments] = useState([]);
   const [search, setSearch] = useState('');
   const [isOpen, setOpen] = useState(false);
   const [prescription, setPrescription] = useState('');
+  const [photo, setPhoto] = useState(null);
+
   useEffect(() => {
     const getData = async () => {
       const res = await axiosInstance.get(`/doctors/getDocAppointments`);
+      console.log(res.data)
       if (res.status === 200) {
         setAppointments(res.data.appointments);
       }
@@ -27,6 +31,22 @@ function Appointments() {
       prescription: prescription,
     });
   };
+
+  const attach = async (photo, appointmentId) => {
+    try {
+      
+      let form = new FormData();
+      form.append("photo", photo[0]);
+
+      const res = await axiosInstance.post(`/doctors/addPhoto/${appointmentId}`, form);
+      if (res.status === 200) {
+        alert("Attachement is uploaded successfully.")
+      }
+
+    } catch (error) {
+      alert("Something went wrong.")
+    }
+  }
 
   return (
     <div>
@@ -56,9 +76,10 @@ function Appointments() {
               <th>Date</th>
               <th>Phone Number</th>
               <th>Speciality</th>
+              <th>Attachement</th>
             </thead>
             {typeof appointments != undefined
-              ? appointments
+              && appointments? appointments
                   .filter((appointment) => {
                     if (search === '') {
                       return appointment;
@@ -78,6 +99,14 @@ function Appointments() {
                         <td>{(new Date(appointment.date)).toDateString()}</td>
                         <td>{appointment.contact || "N/A"}</td>
                         <td>{appointment.speciality || "N/A"}</td>
+                        <td>
+                          {
+                            appointment.photoURL?
+                              <p>An attachement has already been uploaded.</p>
+                              :
+                              <input type={"file"} onChange={(event) => attach(event.target.files, appointment._id)} multiple={false} />
+                          }
+                        </td>
                         {/* {isOpen ? (
                           <td></td>
                         ) : (

@@ -34,7 +34,6 @@ class BookAppointment extends React.Component {
 		this.inputRef = React.createRef();
 	}
 	handleSubmit(e) {
-		console.log(this.state);
 
 		let { Contact, Date, Description, Speciality, Id } = this.state;
 
@@ -68,9 +67,7 @@ class BookAppointment extends React.Component {
 			}
 		})
 	}
-	// componentDidMount() {
-	// 	this.inputRef.current.focus();
-	// }
+
 	render() {
 		return (
 			<div>
