@@ -50,7 +50,7 @@ function Appointments() {
 
   return (
     <div>
-      <SecNavBar link="/doctor/appointments" />
+      <SecNavBar link="/" />
       {/* <Header msg={Cookies.get('patientName')} /> */}
       {/* <NavBar /> */}
       <Row>
